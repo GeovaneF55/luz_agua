@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">luz_agua</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Luz &amp; Água</string>
+    <string name="navigation_drawer_open">Abrir Gaveta de Navegação</string>
+    <string name="navigation_drawer_close">Fechar Gaveta de Navegação</string>
+    <string name="nav_header_title">Luz &amp; Água</string>
+    <string name="nav_header_subtitle">Trabalho de Engenharia de Software 2</string>
+    <string name="nav_header_desc">Ícone</string>
+    <string name="action_settings">Configurações</string>
     <string name="relatorio">Relatório</string>
     <string name="contas">Contas</string>
     <string name="titulares">Titulares</string>

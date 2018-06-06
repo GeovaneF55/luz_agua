@@ -10,7 +10,7 @@
             android:title="@string/titulares" />
         <item
             android:id="@+id/contas"
-            android:icon="@drawable/ic_menu_conta"
+            android:icon="@drawable/ic_menu_contas"
             android:title="@string/contas" />
         <item
             android:id="@+id/relatorio"
