@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "139984367144-02l4n87nufkt1grn81jmm4oq8g3g608c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pucminas.com.br.luz_agua",
+            "certificate_hash": "7fdb330a5495c20a8a96272f3108c840c7104dd2"
+          }
+        },
+        {
           "client_id": "139984367144-b63tkke24keuhcdnhoeucmovb0o084de.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
