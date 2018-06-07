@@ -10,4 +10,6 @@
     <string name="contas">Contas</string>
     <string name="titulares">Titulares</string>
     <string name="sign_out">Sair</string>
+    <string name="welcome">Bem vindo(a)!</string>
+    <string name="no_internet_connection">Sem conexão</string>
 </resources>

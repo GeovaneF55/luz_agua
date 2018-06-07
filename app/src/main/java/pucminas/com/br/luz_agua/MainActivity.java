@@ -14,6 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import pucminas.com.br.luz_agua.controllers.AuthController;
 
@@ -21,6 +25,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private AuthController mAuthController;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +54,31 @@ public class MainActivity extends AppCompatActivity
 
         // User authentication
         mAuthController = new AuthController(this);
-        mAuthController.auth();
+        mAuthStateListener = mAuthController.auth();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mAuthController.removeAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuthController.addAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        FirebaseUser user = mAuthController.getUser();
+        if (user != null) {
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            ((TextView) navigationView.getHeaderView(0)
+                    .findViewById(R.id.nav_header_subtitle)).setText(user.getDisplayName());
+        }
     }
 
     @Override
