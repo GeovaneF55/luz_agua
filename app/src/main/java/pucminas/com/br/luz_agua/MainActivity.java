@@ -1,12 +1,12 @@
 package pucminas.com.br.luz_agua;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,10 +20,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import pucminas.com.br.luz_agua.controllers.AuthController;
+import pucminas.com.br.luz_agua.fragments.AccountRegister;
+import pucminas.com.br.luz_agua.fragments.Holder;
+import pucminas.com.br.luz_agua.fragments.Report;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    // Authentication
     private AuthController mAuthController;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -34,21 +37,13 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        // Find our drawer view
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -125,15 +120,54 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.sign_out) {
-            mAuthController.handleSignOut();
+        switch (id) {
+            case R.id.sign_out:
+                mAuthController.handleSignOut();
+                break;
+            default:
+                navMenu(id);
+
         }
+
+        // Highlight the selected item has been done by NavigationView
+        item.setChecked(true);
+        // Set action bar title
+        setTitle(item.getTitle());
+        // Close the navigation drawer
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void navMenu(int id) {
+        Fragment fragment = null;
+        Class fragmentClass = null;
+
+        switch (id) {
+            case R.id.titulares:
+                fragmentClass = Holder.class;
+                break;
+            case R.id.contas:
+                fragmentClass = AccountRegister.class;
+                break;
+            case R.id.relatorio:
+                fragmentClass = Report.class;
+                break;
+        }
+
+        try {
+            assert fragmentClass != null;
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.frame_layout_content, fragment).commit();
     }
 }
