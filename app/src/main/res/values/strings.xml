@@ -9,4 +9,5 @@
     <string name="relatorio">Relatório</string>
     <string name="contas">Contas</string>
     <string name="titulares">Titulares</string>
+    <string name="sign_out">Sair</string>
 </resources>
