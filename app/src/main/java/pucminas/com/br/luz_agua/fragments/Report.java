@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import pucminas.com.br.luz_agua.R;
+import pucminas.com.br.luz_agua.controllers.MyEditTextDatePicker;
 
 public class Report extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -49,6 +50,14 @@ public class Report extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        new MyEditTextDatePicker(this.getActivity() , R.id.input_relatorio);
+
     }
 
     @Override
