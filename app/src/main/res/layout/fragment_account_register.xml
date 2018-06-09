@@ -70,7 +70,8 @@
                     android:layout_height="wrap_content"
                     android:digits="1234567890.-"
                     android:hint="@string/cpf_cnpj"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColorLink="@color/colorAccent" />
 
             </android.support.design.widget.TextInputLayout>
 
