@@ -9,10 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import pucminas.com.br.luz_agua.MyEditTextDatePicker;
 import pucminas.com.br.luz_agua.R;
 
 public class Report extends Fragment {
+
+    //Instance Firebase
+    private DatabaseReference mDatabase;
+    private FirebaseDatabase mFirebaseDatabase;
+    private ChildEventListener mChildEventListener;
+
     public Report() {
         // Required empty public constructor
     }
@@ -30,6 +40,9 @@ public class Report extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabase = mFirebaseDatabase.getReference().child("messages");
     }
 
     @Override
@@ -66,9 +79,6 @@ public class Report extends Fragment {
     }
 
     public void createComponents(View view) {
-
-
-
 
     }
 }
