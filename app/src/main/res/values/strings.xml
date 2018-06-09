@@ -20,7 +20,9 @@
 
     <string name="tipo_conta">Tipo Conta</string>
     <string name="tipo_pessoa">Pessoa</string>
-    <string name="cpf_cnpj">CPF/CNPJ</string>
+    <string name="cpf">CPF</string>
+    <string name="cnpj">CNPJ</string>
+
     <string name="data_conta">Data Conta</string>
     <string name="consumo">Consumo</string>
 
