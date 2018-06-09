@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import pucminas.com.br.luz_agua.R;
+import pucminas.com.br.luz_agua.adapters.ListAdapter;
 
 
 public class Holder extends Fragment {
@@ -48,9 +49,6 @@ public class Holder extends Fragment {
         recyclerView.setAdapter(listAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-
-        createComponents(view);
-
         return view;
     }
 
@@ -64,61 +62,5 @@ public class Holder extends Fragment {
         super.onDetach();
     }
 
-    public void createComponents(View view){
 
-        // ReciclerView Titular
-        /*mRecyclerView = (RecyclerView) view.findViewById(R.id.recicler_holder);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this.getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new TitularAdapter(myDataset);
-        mRecyclerView.setAdapter(mAdapter);*/
-    }
-
-    public static class ListAdapter extends RecyclerView.Adapter {
-
-
-        @NonNull
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return null;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return 0;
-        }
-
-        private class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
-            private TextView nome_titular_tv;
-            private TextView cpf_titular_tv;
-
-            public ListViewHolder(View itemView) {
-                super(itemView);
-                nome_titular_tv = (TextView) itemView.findViewById(R.id.nome_titular_EditText);
-                cpf_titular_tv =  (TextView) itemView.findViewById(R.id.cpf_titular_EditText);
-                itemView.setOnClickListener(this);
-            }
-
-            /*
-             * Utilizado para inserir dados do banco no Recycler View
-
-            public void bindView(int position) {
-                nome_titular_tv.setText(ALGUMA CLASSE[POSITION]);
-                cpf_titular.tv.setText(ALGUMA CLASSE[POSITION]);
-            }
-
-             */
-
-            public void onClick(View view){
-
-            }
-        }
-    }
 }
