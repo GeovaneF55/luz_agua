@@ -9,16 +9,13 @@
             android:icon="@drawable/ic_menu_titular"
             android:title="@string/titulares" />
         <item
-            android:id="@+id/contas"
+            android:id="@+id/criar_conta"
             android:icon="@drawable/ic_menu_contas"
-            android:title="@string/contas">
-            <menu>
-                <group android:id="@+id/crud_conta" android:checkableBehavior="single">
-                <item android:id="@+id/criar_conta" android:title="@string/registrar_conta" />
-                <item android:id="@+id/exibir_contas" android:title="@string/exibir_contas" />
-                </group>
-            </menu>
-        </item>
+            android:title="@string/registrar_conta"/>
+        <item
+            android:id="@+id/exibir_contas"
+            android:icon="@drawable/ic_menu_account_show_black"
+            android:title="@string/exibir_contas"/>
         <item
             android:id="@+id/relatorio"
             android:icon="@drawable/ic_menu_relatorio"
