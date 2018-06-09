@@ -44,7 +44,10 @@ public class Report extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_report, container, false);
+        View view = inflater.inflate(R.layout.fragment_report, container, false);
+        createComponents(view);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -60,5 +63,11 @@ public class Report extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    public void createComponents(View view) {
+
+
+
     }
 }
