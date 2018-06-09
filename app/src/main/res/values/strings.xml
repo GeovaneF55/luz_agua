@@ -32,6 +32,8 @@
     <string name="listar_por">Listar por</string>
     <string name="titular">Titular</string>
     <string name="data">Data</string>
+    <string name="nome_titular">Nome</string>
+    <string name="razao_social">Razão Social</string>
 
     <!-- Spinners -->
     <string-array name="spinner_tipo_conta">

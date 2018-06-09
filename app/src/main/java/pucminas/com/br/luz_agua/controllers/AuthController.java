@@ -37,6 +37,8 @@ public class AuthController {
         // Not signed in
         if (user == null) {
             startSignIn();
+        } else {
+            mUser = user;
         }
 
         return new FirebaseAuth.AuthStateListener() {

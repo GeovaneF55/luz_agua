@@ -68,7 +68,6 @@ public class MaskUtil {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String value = MaskUtil.unmask(s.toString());
-                android.util.Log.d("TESTE", value);
                 String mask = "";
 
                 if (isUpdating) {
@@ -85,19 +84,16 @@ public class MaskUtil {
                         mask = insertDocMask(CNPJMask, value);
                         break;
                     case CONTA_AGUA:
-                        if (value.length() == 0) {
-                            value = "0000";
+                        if (value.length() > 0) {
+                            mask = insertDoubleMask(value, 3);
+                            mask += " m³";
                         }
-                        mask = insertDoubleMask(value, 3);
-                        mask += " m³";
                         break;
                     case CONTA_LUZ:
-                        if (value.length() == 0) {
-                            value = "0000";
+                        if (value.length() > 0) {
+                            mask = insertDoubleMask(value, 3);
+                            mask += " kW/h";
                         }
-
-                        mask = insertDoubleMask(value, 3);
-                        mask += " kW/h";
                         break;
                 }
 

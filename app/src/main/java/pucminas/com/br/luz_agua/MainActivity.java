@@ -69,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
 
         FirebaseUser user = mAuthController.getUser();
+        if (user == null) {
+            android.util.Log.d("TESTE", "AEHO USERR");
+        }
         if (user != null) {
             NavigationView navigationView = findViewById(R.id.nav_view);
             ((TextView) navigationView.getHeaderView(0)

@@ -27,6 +27,7 @@ import pucminas.com.br.luz_agua.utils.MaskUtil;
 public class AccountRegister extends Fragment{
     private EditText mEditDOC;
     private EditText mEditConsumpt;
+    private TextInputLayout mLayoutTitular;
     private TextInputLayout mLayoutDOC;
     private TextWatcher mTextWatcherDOC;
     private TextWatcher mTextWatcherConsumpt;
@@ -86,6 +87,7 @@ public class AccountRegister extends Fragment{
     public void createComponents(View view){
         mLayoutDOC = view.findViewById(R.id.input_layout_cpf_cnpj);
         mEditDOC = view.findViewById(R.id.input_cpf_cnpj);
+        mLayoutTitular = view.findViewById(R.id.input_layout_titular);
         mTextWatcherDOC = MaskUtil.insert(mEditDOC, MaskUtil.MaskType.CPF);
         mEditDOC.addTextChangedListener(mTextWatcherDOC);
 
@@ -137,6 +139,7 @@ public class AccountRegister extends Fragment{
                 switch ((int) id) {
                     // CPF
                     case 0:
+                        mLayoutTitular.setHint(getText(R.string.nome_titular));
                         mLayoutDOC.setHint(getText(R.string.cpf));
                         mEditDOC.removeTextChangedListener(mTextWatcherDOC);
                         mTextWatcherDOC = MaskUtil.insert(mEditDOC, MaskUtil.MaskType.CPF);
@@ -145,6 +148,7 @@ public class AccountRegister extends Fragment{
 
                     // CNPJ
                     case 1:
+                        mLayoutTitular.setHint(getText(R.string.razao_social));
                         mLayoutDOC.setHint(getText(R.string.cnpj));
                         mEditDOC.removeTextChangedListener(mTextWatcherDOC);
                         mTextWatcherDOC = MaskUtil.insert(mEditDOC, MaskUtil.MaskType.CNPJ);
