@@ -68,9 +68,9 @@
                     android:id="@+id/input_cpf_cnpj"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:digits="1234567890.-"
-                    android:hint="@string/cpf_cnpj"
-                    android:inputType="number" />
+                    android:digits="1234567890"
+                    android:hint="@string/cpf"
+                    android:inputType="number"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -116,7 +116,7 @@
                     android:id="@+id/input_consumo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:digits="1234567890."
+                    android:digits="1234567890"
                     android:hint="@string/consumo"
                     android:inputType="number" />
 

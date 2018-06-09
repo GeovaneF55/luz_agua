@@ -22,7 +22,7 @@ public class MaskUtil {
         if (str.length() == 14){
             defaultMask = CNPJMask;
         }
-        return CPFMask;
+        return defaultMask;
     }
 
     public static TextWatcher insert(final EditText editText, final MaskType maskType) {
