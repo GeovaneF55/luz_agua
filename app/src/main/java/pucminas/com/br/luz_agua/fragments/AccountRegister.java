@@ -61,7 +61,7 @@ public class AccountRegister extends Fragment{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account_register, container, false);
 
-        createComponets(view);
+        createComponents(view);
 
         return view;
     }
@@ -81,7 +81,7 @@ public class AccountRegister extends Fragment{
         super.onDetach();
     }
 
-    public void createComponets(View view){
+    public void createComponents(View view){
         mLayoutDOC = view.findViewById(R.id.input_layout_cpf_cnpj);
         mEditDOC = view.findViewById(R.id.input_cpf_cnpj);
         mTextWatcherDOC = MaskUtil.insert(mEditDOC, MaskUtil.MaskType.CPF);
