@@ -26,8 +26,10 @@ import pucminas.com.br.luz_agua.utils.MaskUtil;
 
 public class AccountRegister extends Fragment{
     private EditText mEditDOC;
+    private EditText mEditConsumpt;
     private TextInputLayout mLayoutDOC;
     private TextWatcher mTextWatcherDOC;
+    private TextWatcher mTextWatcherConsumpt;
 
     public AccountRegister() {
         // Required empty public constructor
@@ -87,12 +89,38 @@ public class AccountRegister extends Fragment{
         mTextWatcherDOC = MaskUtil.insert(mEditDOC, MaskUtil.MaskType.CPF);
         mEditDOC.addTextChangedListener(mTextWatcherDOC);
 
+        mEditConsumpt = view.findViewById(R.id.input_consumo);
+        mTextWatcherConsumpt = MaskUtil.insert(mEditConsumpt, MaskUtil.MaskType.CONTA_AGUA);
+
         // Spinner Tipo Pessoa
         Spinner spinner = view.findViewById(R.id.input_tipo_conta);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(this.getActivity()),
                 R.array.spinner_tipo_conta, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+                switch ((int) id) {
+                    // Agua
+                    case 0:
+                        mEditConsumpt.removeTextChangedListener(mTextWatcherConsumpt);
+                        mTextWatcherConsumpt = MaskUtil.insert(mEditConsumpt, MaskUtil.MaskType.CONTA_AGUA);
+                        mEditDOC.addTextChangedListener(mTextWatcherConsumpt);
+                        break;
+
+                    // Luz
+                    case 1:
+                        mEditConsumpt.removeTextChangedListener(mTextWatcherConsumpt);
+                        mTextWatcherConsumpt = MaskUtil.insert(mEditConsumpt, MaskUtil.MaskType.CONTA_LUZ);
+                        mEditDOC.addTextChangedListener(mTextWatcherConsumpt);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) { }
+        });
 
         // Spinner Tipo Pessoa
         spinner = view.findViewById(R.id.input_tipo_pessoa);
@@ -106,7 +134,6 @@ public class AccountRegister extends Fragment{
                 switch ((int) id) {
                     // CPF
                     case 0:
-                        mEditDOC.setHint(getText(R.string.cpf));
                         mLayoutDOC.setHint(getText(R.string.cpf));
                         mEditDOC.removeTextChangedListener(mTextWatcherDOC);
                         mTextWatcherDOC = MaskUtil.insert(mEditDOC, MaskUtil.MaskType.CPF);
@@ -115,7 +142,6 @@ public class AccountRegister extends Fragment{
 
                     // CNPJ
                     case 1:
-                        mEditDOC.setHint(getText(R.string.cnpj));
                         mLayoutDOC.setHint(getText(R.string.cnpj));
                         mEditDOC.removeTextChangedListener(mTextWatcherDOC);
                         mTextWatcherDOC = MaskUtil.insert(mEditDOC, MaskUtil.MaskType.CNPJ);

@@ -10,7 +10,9 @@ public class MaskUtil {
     private static final String CNPJMask = "##.###.###/####-##";
     public enum MaskType {
         CPF,
-        CNPJ
+        CNPJ,
+        CONTA_AGUA,
+        CONTA_LUZ
     }
 
     public static String unmask(String s) {
@@ -33,13 +35,24 @@ public class MaskUtil {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String value = MaskUtil.unmask(s.toString());
-                String mask;
+                String mask = "";
+
                 switch (maskType) {
                     case CPF:
                         mask = CPFMask;
                         break;
                     case CNPJ:
                         mask = CNPJMask;
+                        break;
+                    case CONTA_AGUA:
+                        float floatValue = Float.parseFloat(value);
+                        value = Float.toString(floatValue);
+                        value += " m³";
+                        break;
+                    case CONTA_LUZ:
+                        floatValue = Float.parseFloat(value);
+                        value = Float.toString(floatValue);
+                        value += " kW/h";
                         break;
                     default:
                         mask = getDefaultMask(value);
