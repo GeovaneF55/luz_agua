@@ -112,7 +112,7 @@ public class AuthController {
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
                         .setIsSmartLockEnabled(false)
-                        .setTheme(R.style.GreenTheme)
+                        .setTheme(R.style.BlueTheme)
                         .build(),
                 RC_SIGN_IN
         );
