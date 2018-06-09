@@ -91,7 +91,6 @@
                     android:id="@+id/input_data_conta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
                     android:cursorVisible="false"
                     android:focusable="false"
                     android:hint="@string/data_conta"
