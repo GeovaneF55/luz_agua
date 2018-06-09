@@ -25,6 +25,8 @@
 
     <string name="data_conta">Data Conta</string>
     <string name="consumo">Consumo</string>
+    <string name="registrar_conta">Registrar Conta</string>
+    <string name="exibir_contas">Exibir Contas</string>
 
     <string-array name="spinner_tipo_conta">
         <item>Água</item>

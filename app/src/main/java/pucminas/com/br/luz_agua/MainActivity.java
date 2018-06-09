@@ -146,8 +146,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.titulares:
                 fragmentClass = Holder.class;
                 break;
-            case R.id.contas:
+            case R.id.criar_conta:
                 fragmentClass = AccountRegister.class;
+                break;
+            case R.id.exibir_contas:
                 break;
             case R.id.relatorio:
                 fragmentClass = Report.class;

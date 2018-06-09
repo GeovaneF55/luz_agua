@@ -13,9 +13,9 @@
             android:icon="@drawable/ic_menu_contas"
             android:title="@string/contas">
             <menu>
-                <group android:id="@+id/group2" android:checkableBehavior="single">
-                <item android:id="@+id/submenu1" android:title="   Criar Conta" />
-                <item android:id="@+id/submenu2" android:title="   Exibir Conta" />
+                <group android:id="@+id/crud_conta" android:checkableBehavior="single">
+                <item android:id="@+id/criar_conta" android:title="@string/registrar_conta" />
+                <item android:id="@+id/exibir_contas" android:title="@string/exibir_contas" />
                 </group>
             </menu>
         </item>
