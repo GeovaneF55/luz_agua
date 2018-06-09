@@ -16,18 +16,9 @@ import android.widget.Spinner;
 import java.util.Objects;
 
 import pucminas.com.br.luz_agua.R;
-import pucminas.com.br.luz_agua.controllers.MyEditTextDatePicker;
+import pucminas.com.br.luz_agua.MyEditTextDatePicker;
 
 public class AccountRegister extends Fragment{
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public AccountRegister() {
         // Required empty public constructor
     }
@@ -36,16 +27,11 @@ public class AccountRegister extends Fragment{
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment AccountRegister.
      */
-    // TODO: Rename and change types and number of parameters
     public static AccountRegister newInstance(String param1, String param2) {
         AccountRegister fragment = new AccountRegister();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,11 +39,6 @@ public class AccountRegister extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -96,14 +77,14 @@ public class AccountRegister extends Fragment{
 
     public void createComponets(View view){
         // Spinner Tipo Pessoa
-        Spinner spinner = (Spinner) view.findViewById(R.id.input_tipo_conta);
+        Spinner spinner = view.findViewById(R.id.input_tipo_conta);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(this.getActivity()),
                 R.array.spinner_tipo_conta, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
 
         // Spinner Tipo Pessoa
-        spinner = (Spinner) view.findViewById(R.id.input_tipo_pessoa);
+        spinner = view.findViewById(R.id.input_tipo_pessoa);
         adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(this.getActivity()),
                 R.array.spinner_tipo_pessoa, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);

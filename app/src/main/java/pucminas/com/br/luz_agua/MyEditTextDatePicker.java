@@ -1,4 +1,4 @@
-package pucminas.com.br.luz_agua.controllers;
+package pucminas.com.br.luz_agua;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
