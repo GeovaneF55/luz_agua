@@ -91,6 +91,7 @@ public class AccountRegister extends Fragment{
 
         mEditConsumpt = view.findViewById(R.id.input_consumo);
         mTextWatcherConsumpt = MaskUtil.insert(mEditConsumpt, MaskUtil.MaskType.CONTA_AGUA);
+        mEditConsumpt.addTextChangedListener(mTextWatcherConsumpt);
 
         // Spinner Tipo Pessoa
         Spinner spinner = view.findViewById(R.id.input_tipo_conta);
@@ -106,16 +107,18 @@ public class AccountRegister extends Fragment{
                     case 0:
                         mEditConsumpt.removeTextChangedListener(mTextWatcherConsumpt);
                         mTextWatcherConsumpt = MaskUtil.insert(mEditConsumpt, MaskUtil.MaskType.CONTA_AGUA);
-                        mEditDOC.addTextChangedListener(mTextWatcherConsumpt);
+                        mEditConsumpt.addTextChangedListener(mTextWatcherConsumpt);
                         break;
 
                     // Luz
                     case 1:
                         mEditConsumpt.removeTextChangedListener(mTextWatcherConsumpt);
                         mTextWatcherConsumpt = MaskUtil.insert(mEditConsumpt, MaskUtil.MaskType.CONTA_LUZ);
-                        mEditDOC.addTextChangedListener(mTextWatcherConsumpt);
+                        mEditConsumpt.addTextChangedListener(mTextWatcherConsumpt);
                         break;
                 }
+
+                mEditConsumpt.setText(mEditConsumpt.getText());
             }
 
             @Override
