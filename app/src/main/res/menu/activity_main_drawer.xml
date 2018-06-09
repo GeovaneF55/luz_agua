@@ -11,7 +11,14 @@
         <item
             android:id="@+id/contas"
             android:icon="@drawable/ic_menu_contas"
-            android:title="@string/contas" />
+            android:title="@string/contas">
+            <menu>
+                <group android:id="@+id/group2" android:checkableBehavior="single">
+                <item android:id="@+id/submenu1" android:title="   Criar Conta" />
+                <item android:id="@+id/submenu2" android:title="   Exibir Conta" />
+                </group>
+            </menu>
+        </item>
         <item
             android:id="@+id/relatorio"
             android:icon="@drawable/ic_menu_relatorio"
