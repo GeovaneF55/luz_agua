@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import pucminas.com.br.luz_agua.MyEditTextDatePicker;
 import pucminas.com.br.luz_agua.R;
 
 public class Report extends Fragment {
@@ -23,10 +24,7 @@ public class Report extends Fragment {
      * @return A new instance of fragment Report.
      */
     public static Report newInstance() {
-        Report fragment = new Report();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new Report();
     }
 
     @Override
@@ -38,7 +36,7 @@ public class Report extends Fragment {
     public void onStart() {
         super.onStart();
 
-        // new MyEditTextDatePicker(this.getActivity() , R.id.input_relatorio);
+         new MyEditTextDatePicker(this.getActivity() , R.id.input_relatorio);
 
     }
 

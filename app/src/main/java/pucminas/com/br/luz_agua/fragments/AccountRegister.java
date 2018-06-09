@@ -29,11 +29,8 @@ public class AccountRegister extends Fragment{
      *
      * @return A new instance of fragment AccountRegister.
      */
-    public static AccountRegister newInstance(String param1, String param2) {
-        AccountRegister fragment = new AccountRegister();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+    public static AccountRegister newInstance() {
+        return new AccountRegister();
     }
 
     @Override
@@ -97,7 +94,6 @@ public class AccountRegister extends Fragment{
             public void onClick(View view) {
                 Snackbar.make(view, "Geovane lindo!!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-
             }
 
         });
