@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import pucminas.com.br.luz_agua.controllers.AuthController;
 import pucminas.com.br.luz_agua.fragments.AccountRegister;
+import pucminas.com.br.luz_agua.fragments.AccountShow;
 import pucminas.com.br.luz_agua.fragments.Holder;
 import pucminas.com.br.luz_agua.fragments.Report;
 
@@ -150,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentClass = AccountRegister.class;
                 break;
             case R.id.exibir_contas:
+                fragmentClass = AccountShow.class;
                 break;
             case R.id.relatorio:
                 fragmentClass = Report.class;

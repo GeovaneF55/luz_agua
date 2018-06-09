@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AccountRegister">
+    tools:context=".fragments.AccountShow">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,17 +18,16 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/input_layout_tipo_conta"
+                android:id="@+id/input_layout_tipo_conta_exibir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tipo_conta" />
 
             <Spinner
-                android:id="@+id/input_tipo_conta"
+                android:id="@+id/input_tipo_conta_exibir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/tipo_conta" />
-
 
         </LinearLayout>
 
@@ -40,16 +38,16 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/input_layout_tipo_pessoa"
+                android:id="@+id/input_layout_listar_por_exibir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tipo_pessoa" />
+                android:text="@string/listar_por" />
 
             <Spinner
-                android:id="@+id/input_tipo_pessoa"
+                android:id="@+id/input_tipo_listar_por_exibir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/tipo_pessoa" />
+                android:hint="@string/listar_por" />
 
         </LinearLayout>
 
@@ -60,78 +58,54 @@
             android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_cpf_cnpj"
+                android:id="@+id/input_layout_titular_exibir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/input_cpf_cnpj"
+                    android:id="@+id/input_titular_exibir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:digits="1234567890"
-                    android:hint="@string/cpf"
-                    android:inputType="number"/>
-
-            </android.support.design.widget.TextInputLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_data_conta"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/input_data_conta"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:hint="@string/data_conta"
+                    android:hint="@string/titular"
                     android:inputType="text" />
 
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_data_exibir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_data_exibir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:hint="@string/data"
+                    android:inputType="text" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="20dp"
             android:orientation="horizontal">
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_consumo"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recicler_contas"
+                android:scrollbars="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/input_consumo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:digits="1234567890"
-                    android:hint="@string/consumo"
-                    android:inputType="number" />
-
-            </android.support.design.widget.TextInputLayout>
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
     </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/new_conta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_check_black"
-        app:backgroundTint="@color/corButton" />
 
 </FrameLayout>
