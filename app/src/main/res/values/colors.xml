@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#1c2d9b</color>
+    <color name="colorPrimaryDark">#0b1b84</color>
     <color name="colorAccent">#0377fa</color>
     <color name="corButton">#2d9c36</color>
+    <color name="loginBackground">#2f3e9d</color>
+    <color name="material_green_500">#4CAF50</color>
+    <color name="material_green_700">#388E3C</color>
+    <color name="material_green_a200">#FFFFFF</color>
+    <color name="material_lime_a700">#FFFFFF</color>
 </resources>
