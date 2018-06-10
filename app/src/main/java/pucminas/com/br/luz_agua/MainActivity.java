@@ -17,12 +17,14 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import pucminas.com.br.luz_agua.controllers.AuthController;
-import pucminas.com.br.luz_agua.fragments.AccountRegister;
-import pucminas.com.br.luz_agua.fragments.AccountShow;
-import pucminas.com.br.luz_agua.fragments.Holder;
-import pucminas.com.br.luz_agua.fragments.Report;
+import pucminas.com.br.luz_agua.fragments.BillRegisterFragment;
+import pucminas.com.br.luz_agua.fragments.BillShowFragment;
+import pucminas.com.br.luz_agua.fragments.HolderFragment;
+import pucminas.com.br.luz_agua.fragments.ReportFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -50,6 +52,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // User authentication
         mAuthController = new AuthController(this);
         mAuthStateListener = mAuthController.auth();
+
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
     }
 
     @Override
@@ -106,8 +114,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         /*if (id == R.id.action_settings) {
             return true;
@@ -148,16 +154,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id) {
             case R.id.titulares:
-                fragmentClass = Holder.class;
+                fragmentClass = HolderFragment.class;
                 break;
             case R.id.criar_conta:
-                fragmentClass = AccountRegister.class;
+                fragmentClass = BillRegisterFragment.class;
                 break;
             case R.id.exibir_contas:
-                fragmentClass = AccountShow.class;
+                fragmentClass = BillShowFragment.class;
                 break;
             case R.id.relatorio:
-                fragmentClass = Report.class;
+                fragmentClass = ReportFragment.class;
                 break;
         }
 

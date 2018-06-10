@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AccountRegister">
+    tools:context=".fragments.BillRegisterFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,9 +68,8 @@
                     android:id="@+id/input_titular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:digits="1234567890"
                     android:hint="@string/nome_titular"
-                    android:inputType="number" />
+                    android:inputType="text" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -118,6 +117,29 @@
                     android:focusable="false"
                     android:hint="@string/data_conta"
                     android:inputType="text" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_consumo_anterior"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_consumo_anterior"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="1234567890"
+                    android:hint="@string/consumo_anterior"
+                    android:inputType="number" />
 
             </android.support.design.widget.TextInputLayout>
 

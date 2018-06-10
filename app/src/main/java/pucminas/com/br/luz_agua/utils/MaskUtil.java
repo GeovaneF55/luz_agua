@@ -20,7 +20,7 @@ public class MaskUtil {
         CONTA_LUZ
     }
 
-    private static String unmask(String s) {
+    public static String unmask(String s) {
         return s.replaceAll("[^0-9]*", "");
     }
 
@@ -69,6 +69,7 @@ public class MaskUtil {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String value = MaskUtil.unmask(s.toString());
                 String mask = "";
+                int posSelection = 0;
 
                 if (isUpdating) {
                     oldValue = value;
@@ -79,30 +80,34 @@ public class MaskUtil {
                 switch (maskType) {
                     case CPF:
                         mask = insertDocMask(CPFMask, value);
+                        posSelection = mask.length();
                         break;
                     case CNPJ:
                         mask = insertDocMask(CNPJMask, value);
+                        posSelection = mask.length();
                         break;
                     case CONTA_AGUA:
                         if (value.length() > 0) {
                             mask = insertDoubleMask(value, 3);
                             mask += " m³";
+                            posSelection = mask.length() - 3;
                         }
                         break;
                     case CONTA_LUZ:
                         if (value.length() > 0) {
                             mask = insertDoubleMask(value, 3);
                             mask += " kW/h";
+                            posSelection = mask.length() - 5;
                         }
                         break;
                 }
 
                 isUpdating = true;
                 editText.setText(mask);
-                editText.setSelection(mask.length());
+                editText.setSelection(posSelection);
             }
 
-            public void beforeTextChanged(CharSequence s, int start, int count,int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             public void afterTextChanged(Editable s) {}
         };
     }

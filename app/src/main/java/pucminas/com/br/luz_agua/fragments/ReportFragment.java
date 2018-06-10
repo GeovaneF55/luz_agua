@@ -16,14 +16,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import pucminas.com.br.luz_agua.MyEditTextDatePicker;
 import pucminas.com.br.luz_agua.R;
 
-public class Report extends Fragment {
+public class ReportFragment extends Fragment {
 
-    //Instance Firebase
+    // Instance Firebase
     private DatabaseReference mDatabase;
     private FirebaseDatabase mFirebaseDatabase;
     private ChildEventListener mChildEventListener;
 
-    public Report() {
+    public ReportFragment() {
         // Required empty public constructor
     }
 
@@ -31,10 +31,10 @@ public class Report extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment Report.
+     * @return A new instance of fragment ReportFragment.
      */
-    public static Report newInstance() {
-        return new Report();
+    public static ReportFragment newInstance() {
+        return new ReportFragment();
     }
 
     @Override

@@ -9,16 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import pucminas.com.br.luz_agua.R;
 import pucminas.com.br.luz_agua.adapters.ListAdapter;
 
 
-public class Holder extends Fragment {
+public class HolderFragment extends Fragment {
 
 
-    public Holder() {
+    public HolderFragment() {
         // Required empty public constructor
     }
 
@@ -26,10 +25,10 @@ public class Holder extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment Holder.
+     * @return A new instance of fragment HolderFragment.
      */
-    public static Holder newInstance() {
-        return new Holder();
+    public static HolderFragment newInstance() {
+        return new HolderFragment();
     }
 
     @Override

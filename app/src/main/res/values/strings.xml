@@ -20,13 +20,13 @@
     <string name="welcome">Bem vindo(a)!</string>
     <string name="no_internet_connection">Sem conexão</string>
 
-    <!-- Account Register -->
+    <!-- Bill Register -->
     <string name="tipo_conta">Tipo Conta</string>
     <string name="tipo_pessoa">Pessoa</string>
     <string name="cpf">CPF</string>
     <string name="cnpj">CNPJ</string>
 
-    <!-- Account Show -->
+    <!-- Bill Show -->
     <string name="data_conta">Data Conta</string>
     <string name="consumo">Consumo</string>
     <string name="listar_por">Listar por</string>
@@ -34,6 +34,7 @@
     <string name="data">Data</string>
     <string name="nome_titular">Nome</string>
     <string name="razao_social">Razão Social</string>
+    <string name="consumo_anterior">Consumo Anterior</string>
 
     <!-- Spinners -->
     <string-array name="spinner_tipo_conta">

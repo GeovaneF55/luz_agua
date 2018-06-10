@@ -17,16 +17,16 @@ import java.util.Objects;
 import pucminas.com.br.luz_agua.MyEditTextDatePicker;
 import pucminas.com.br.luz_agua.R;
 
-public class AccountShow extends Fragment {
+public class BillShowFragment extends Fragment {
 
     Context mContext;
 
-    public AccountShow() {
+    public BillShowFragment() {
         // Required empty public constructor
     }
 
-    public static AccountShow newInstance() {
-        return new AccountShow();
+    public static BillShowFragment newInstance() {
+        return new BillShowFragment();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class AccountShow extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_account_show, container, false);
+        View view = inflater.inflate(R.layout.fragment_bill_show, container, false);
 
         createComponents(view);
 

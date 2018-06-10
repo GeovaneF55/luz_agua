@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import pucminas.com.br.luz_agua.R;
 
-public class TitularAdapter extends RecyclerView.Adapter<TitularAdapter.ViewHolder> {
+public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder> {
     private String[] mDataset;
 
     // Provide a reference to the views for each data item
@@ -24,15 +24,15 @@ public class TitularAdapter extends RecyclerView.Adapter<TitularAdapter.ViewHold
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public TitularAdapter(String[] myDataset) {
+    public HolderAdapter(String[] myDataset) {
         mDataset = myDataset;
     }
 
     // Create new views (invoked by the layout manager)
     @NonNull
     @Override
-    public TitularAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                                                        int viewType) {
+    public HolderAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+                                                       int viewType) {
         // create a new view
         TextView v = (TextView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_main, parent, false);
