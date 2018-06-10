@@ -19,9 +19,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="colorControlNormal">@color/material_green_500</item>
-        <item name="colorControlActivated">@color/material_lime_a700</item>
-        <item name="colorControlHighlight">@color/material_green_a200</item>
+        <item name="colorControlNormal">@color/white_colour</item>
+        <item name="colorControlActivated">@color/white_colour</item>
+        <item name="colorControlHighlight">@color/white_colour</item>
         <item name="android:windowBackground">@color/loginBackground</item>
     </style>
 
