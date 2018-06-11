@@ -17,8 +17,6 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import pucminas.com.br.luz_agua.controllers.AuthController;
 import pucminas.com.br.luz_agua.fragments.BillRegisterFragment;
@@ -31,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // Authentication
     private AuthController mAuthController;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // User authentication
         mAuthController = new AuthController(this);
         mAuthStateListener = mAuthController.auth();
+
     }
 
     @Override
@@ -168,4 +168,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.frame_layout_content, fragment).commit();
     }
+
 }

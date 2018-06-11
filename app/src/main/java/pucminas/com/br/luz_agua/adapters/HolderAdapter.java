@@ -57,6 +57,7 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ListViewHo
         }
 
         public void onClick(View view){
+
         }
 
     }
