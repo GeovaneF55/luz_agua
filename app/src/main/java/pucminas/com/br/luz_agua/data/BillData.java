@@ -1,4 +1,4 @@
-package pucminas.com.br.luz_agua.model;
+package pucminas.com.br.luz_agua.data;
 
 public class BillData {
     private String conta;

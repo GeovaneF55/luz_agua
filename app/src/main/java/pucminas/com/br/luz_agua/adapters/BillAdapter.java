@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import pucminas.com.br.luz_agua.R;
-import pucminas.com.br.luz_agua.model.BillData;
+import pucminas.com.br.luz_agua.data.BillData;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillView> {
     private Context mCtx;

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import pucminas.com.br.luz_agua.R;
-import pucminas.com.br.luz_agua.model.HolderData;
+import pucminas.com.br.luz_agua.data.HolderData;
 
 public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ListViewHolder> {
 

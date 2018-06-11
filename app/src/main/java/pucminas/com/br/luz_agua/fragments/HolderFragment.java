@@ -15,7 +15,7 @@ import java.util.List;
 
 import pucminas.com.br.luz_agua.R;
 import pucminas.com.br.luz_agua.adapters.HolderAdapter;
-import pucminas.com.br.luz_agua.model.HolderData;
+import pucminas.com.br.luz_agua.data.HolderData;
 
 
 public class HolderFragment extends Fragment {

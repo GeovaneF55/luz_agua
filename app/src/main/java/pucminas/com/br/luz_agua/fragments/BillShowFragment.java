@@ -21,7 +21,7 @@ import java.util.Objects;
 import pucminas.com.br.luz_agua.MyEditTextDatePicker;
 import pucminas.com.br.luz_agua.R;
 import pucminas.com.br.luz_agua.adapters.BillAdapter;
-import pucminas.com.br.luz_agua.model.BillData;
+import pucminas.com.br.luz_agua.data.BillData;
 
 public class BillShowFragment extends Fragment {
 
