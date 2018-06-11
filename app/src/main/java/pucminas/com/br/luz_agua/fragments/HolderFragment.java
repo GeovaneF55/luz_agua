@@ -10,11 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pucminas.com.br.luz_agua.R;
 import pucminas.com.br.luz_agua.adapters.ListAdapter;
+import pucminas.com.br.luz_agua.model.OurData;
 
 
 public class HolderFragment extends Fragment {
+
+    ListAdapter adapter;
+    List<OurData> dataList;
 
 
     public HolderFragment() {
@@ -43,12 +50,26 @@ public class HolderFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_holder, container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recicler_holder);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        dataList = new ArrayList<>();
+        addData();
 
-        ListAdapter listAdapter = new ListAdapter();
-        recyclerView.setAdapter(listAdapter);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
+        adapter = new ListAdapter(getContext(),dataList);
+        recyclerView.setAdapter(adapter);
+
         return view;
+    }
+
+
+    /**
+     * Aqui será feito a inserção dos dados buscados do Firebase
+     */
+    private void addData() {
+
+        dataList.add(new OurData("Liu Yang","999.999.999-99"));
+        dataList.add(new OurData("SCC Corpo", "80.699.229/0001-04"));
+        dataList.add(new OurData("Zézin", "555.555.555-55"));
     }
 
     @Override
