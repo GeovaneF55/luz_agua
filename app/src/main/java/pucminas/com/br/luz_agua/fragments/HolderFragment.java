@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pucminas.com.br.luz_agua.R;
-import pucminas.com.br.luz_agua.adapters.ListAdapter;
+import pucminas.com.br.luz_agua.adapters.HolderAdapter;
 import pucminas.com.br.luz_agua.model.OurData;
 
 
 public class HolderFragment extends Fragment {
 
-    ListAdapter adapter;
+    HolderAdapter adapter;
     List<OurData> dataList;
 
 
@@ -55,7 +55,7 @@ public class HolderFragment extends Fragment {
         dataList = new ArrayList<>();
         addData();
 
-        adapter = new ListAdapter(getContext(),dataList);
+        adapter = new HolderAdapter(getContext(),dataList);
         recyclerView.setAdapter(adapter);
 
         return view;
