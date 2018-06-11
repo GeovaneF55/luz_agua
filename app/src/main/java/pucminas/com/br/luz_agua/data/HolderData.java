@@ -1,13 +1,14 @@
 package pucminas.com.br.luz_agua.data;
 
+import pucminas.com.br.luz_agua.models.Holder;
+
 public class HolderData {
-
     private String nome;
-    private String cpf;
+    private String doc;
 
-    public HolderData(String nome, String cpf) {
+    public HolderData(String nome, String doc) {
         this.nome = nome;
-        this.cpf = cpf;
+        this.doc = doc;
     }
 
     public String getNome() {
@@ -18,11 +19,11 @@ public class HolderData {
         this.nome = nome;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getDoc() {
+        return doc;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setdoc(String doc) {
+        this.doc = doc;
     }
 }

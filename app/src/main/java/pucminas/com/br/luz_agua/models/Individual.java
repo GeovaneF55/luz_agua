@@ -5,7 +5,7 @@ public class Individual extends Holder {
     private String firstName;
     private String lastName;
 
-    public String getFullName() {
+    public String fullName() {
         return firstName + " " + lastName;
     }
 
