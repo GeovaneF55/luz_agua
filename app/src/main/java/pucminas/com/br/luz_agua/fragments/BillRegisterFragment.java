@@ -243,7 +243,8 @@ public class BillRegisterFragment extends Fragment{
                 return child;
             }
 
-            private void writeBill(String child, String doc, String date, double lastConsumpt, double consumpt) {
+            private void writeBill(String holderChild, String holderDoc,
+                                   String date, double lastConsumpt, double consumpt) {
                 String month = "";
                 String year = "";
                 if (date.length() > 0) {
@@ -265,8 +266,8 @@ public class BillRegisterFragment extends Fragment{
                         break;
                 }
 
-                mDatabase.child(child).child(doc).child("contas").child(typeBill)
-                        .child(month + year).setValue(bill);
+                mDatabase.child("contas").child(typeBill).child(holderChild + "_" + holderDoc)
+                        .push().setValue(bill);
             }
 
             @Override
