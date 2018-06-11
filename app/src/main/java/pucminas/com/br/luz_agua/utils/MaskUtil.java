@@ -9,8 +9,8 @@ import java.util.Locale;
 
 public class MaskUtil {
 
-    private static final String CPFMask = "###.###.###-##";
-    private static final String CNPJMask = "##.###.###/####-##";
+    public static final String CPFMask = "###.###.###-##";
+    public static final String CNPJMask = "##.###.###/####-##";
     public enum MaskType {
         CPF,
         CNPJ,

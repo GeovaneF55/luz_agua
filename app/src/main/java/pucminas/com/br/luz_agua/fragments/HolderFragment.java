@@ -2,8 +2,7 @@ package pucminas.com.br.luz_agua.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -98,7 +97,6 @@ public class HolderFragment extends Fragment {
                 RecyclerView recyclerView = mView.findViewById(R.id.recicler_holder);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
                 dataListFinal.addAll(dataListFisica);
                 dataListFinal.addAll(dataListJuridica);
@@ -120,7 +118,6 @@ public class HolderFragment extends Fragment {
                 dataListFinal.clear();
                 Log.d("teste", "cheguei aqui" );
                 for(DataSnapshot holder : dataSnapshot.getChildren())  {
-                    //Holder h = new IndividualFactory().createHolder();
                     Holder h = holder.getValue(Company.class);
                     assert h != null;
 
@@ -128,7 +125,6 @@ public class HolderFragment extends Fragment {
                 }
                 RecyclerView recyclerView = mView.findViewById(R.id.recicler_holder);
                 recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
                 dataListFinal.addAll(dataListFisica);
