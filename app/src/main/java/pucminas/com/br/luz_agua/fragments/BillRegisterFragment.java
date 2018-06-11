@@ -262,7 +262,8 @@ public class BillRegisterFragment extends Fragment{
                         break;
                 }
 
-                mDatabase.child(child).child(doc).child("contas").child(typeBill).push().setValue(bill);
+                mDatabase.child(child).child(doc).child("contas").child(typeBill)
+                        .child(month + year).setValue(bill);
             }
 
             @Override

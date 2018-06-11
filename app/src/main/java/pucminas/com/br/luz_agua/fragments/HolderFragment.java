@@ -49,7 +49,7 @@ public class HolderFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_holder, container, false);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recicler_holder);
+        RecyclerView recyclerView = view.findViewById(R.id.recicler_holder);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         dataList = new ArrayList<>();
