@@ -5,11 +5,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,30 +16,23 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.google.android.gms.tasks.OnCanceledListener;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.Objects;
 
+import pucminas.com.br.luz_agua.CompanyFactory;
 import pucminas.com.br.luz_agua.ElectricityBillFactory;
 import pucminas.com.br.luz_agua.IndividualFactory;
 import pucminas.com.br.luz_agua.R;
 import pucminas.com.br.luz_agua.MyEditTextDatePicker;
 import pucminas.com.br.luz_agua.WaterBillFactory;
 import pucminas.com.br.luz_agua.models.Bill;
-import pucminas.com.br.luz_agua.models.ElectricityBill;
+import pucminas.com.br.luz_agua.models.Company;
 import pucminas.com.br.luz_agua.models.Holder;
 import pucminas.com.br.luz_agua.models.Individual;
-import pucminas.com.br.luz_agua.models.WaterBill;
 import pucminas.com.br.luz_agua.utils.MaskUtil;
 
 public class BillRegisterFragment extends Fragment{
@@ -71,7 +62,6 @@ public class BillRegisterFragment extends Fragment{
 
     //Instance Firebase
     private DatabaseReference mDatabase;
-    private ChildEventListener mChildEventListener;
 
     public BillRegisterFragment() {
         // Required empty public constructor
@@ -90,17 +80,13 @@ public class BillRegisterFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabase = firebaseDatabase.getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
         new MyEditTextDatePicker(this.getActivity() , R.id.input_data_conta);
-
     }
 
     @Override
@@ -223,37 +209,38 @@ public class BillRegisterFragment extends Fragment{
 
         FloatingActionButton fab = view.findViewById(R.id.new_conta);
         fab.setOnClickListener(new View.OnClickListener() {
+            private String writeHolder(String name, String doc) {
+                HolderSelectIds id = HolderSelectIds.values()[(int) mHolderSpinner.getSelectedItemId()];
+                Holder holder = null;
+                String child = "";
 
-            @Override
-            public void onClick(View view) {
-                String holderName = mEditHolder.getText().toString().trim();
-                String doc = MaskUtil.unmask(mEditDOC.getText().toString());
-                HolderSelectIds holderId = HolderSelectIds.values()[(int) mHolderSpinner.getSelectedItemId()];
-
-                Holder holder;
-                switch (holderId) {
+                switch (id) {
                     case INDIVIDUAL:
+                        child = "pessoa_fisica";
                         holder = new IndividualFactory().createHolder();
-                        if (holderName.contains(" ")) {
-                            ((Individual) holder).setFirstName(holderName.substring(0, holderName.indexOf(' ')));
-                            ((Individual) holder).setLastName(holderName.substring(holderName.indexOf(' ') + 1));
+                        if (name.contains(" ")) {
+                            ((Individual) holder).setFirstName(name.substring(0, name.indexOf(' ')));
+                            ((Individual) holder).setLastName(name.substring(name.indexOf(' ') + 1));
                         } else {
-                            ((Individual) holder).setFirstName(holderName);
+                            ((Individual) holder).setFirstName(name);
                             ((Individual) holder).setLastName("");
                         }
 
                         ((Individual) holder).setCPF(doc);
-                        mDatabase.child("pessoa_fisica").push().setValue(holder);
                         break;
                     case COMPANY:
+                        child = "pessoa_juridica";
+                        holder = new CompanyFactory().createHolder();
+                        ((Company) holder).setCompanyName(name);
+                        ((Company) holder).setCNPJ(doc);
                         break;
                 }
 
-                /*
-                String date = mEditDate.getText().toString();
-                double lastConsumpt = Double.parseDouble(MaskUtil.unmask(mEditLastConsumpt.getText().toString()));
-                double consumpt = Double.parseDouble(MaskUtil.unmask(mEditConsumpt.getText().toString()));
+                mDatabase.child(child).child(doc).setValue(holder);
+                return child;
+            }
 
+            private void writeBill(String child, String doc, String date, double lastConsumpt, double consumpt) {
                 String month = "";
                 String year = "";
                 if (date.length() > 0) {
@@ -261,21 +248,38 @@ public class BillRegisterFragment extends Fragment{
                     year = date.substring(date.lastIndexOf('/') + 1);
                 }
 
+                String typeBill = "";
                 Bill bill = null;
-                double value = 0;
                 BillSelectIds billId = BillSelectIds.values()[(int) mBillSpinner.getSelectedItemId()];
                 switch (billId) {
                     case WATER:
                         bill = new WaterBillFactory().createAccount(month, year, lastConsumpt, consumpt);
+                        typeBill = "agua";
                         break;
                     case ELECTRICITY:
                         bill = new ElectricityBillFactory().createAccount(month, year, lastConsumpt, consumpt);
+                        typeBill = "luz";
                         break;
                 }
 
-                value = bill.calcularValor();*/
+                mDatabase.child(child).child(doc).child("contas").child(typeBill)
+                        .child(month + year).setValue(bill);
+            }
 
-//                Snackbar.make(view, "VOU CATUCAR SEU BOGA", Snackbar.LENGTH_LONG).show();
+            @Override
+            public void onClick(View view) {
+                String holderName = mEditHolder.getText().toString().trim();
+                String doc = MaskUtil.unmask(mEditDOC.getText().toString());
+                String child = writeHolder(holderName, doc);
+
+                String date = mEditDate.getText().toString();
+                char decimalSeparator = DecimalFormatSymbols.getInstance(Locale.getDefault()).getDecimalSeparator();
+                double lastConsumpt = Double.parseDouble(mEditLastConsumpt.getText()
+                        .toString().replaceAll("[^0-9" + decimalSeparator + "]", ""));
+                double consumpt = Double.parseDouble(mEditConsumpt.getText()
+                        .toString().replaceAll("[^0-9" + decimalSeparator + "]", ""));
+
+                writeBill(child, doc, date, lastConsumpt, consumpt);
             }
         });
     }

@@ -52,12 +52,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // User authentication
         mAuthController = new AuthController(this);
         mAuthStateListener = mAuthController.auth();
-
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, World!");
     }
 
     @Override
@@ -77,9 +71,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
 
         FirebaseUser user = mAuthController.getUser();
-        if (user == null) {
-            android.util.Log.d("TESTE", "AEHO USERR");
-        }
         if (user != null) {
             NavigationView navigationView = findViewById(R.id.nav_view);
             ((TextView) navigationView.getHeaderView(0)
@@ -141,7 +132,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Set action bar title
         setTitle(item.getTitle());
         // Close the navigation drawer
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
