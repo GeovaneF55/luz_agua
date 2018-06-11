@@ -27,6 +27,7 @@ import pucminas.com.br.luz_agua.IndividualFactory;
 import pucminas.com.br.luz_agua.R;
 import pucminas.com.br.luz_agua.adapters.HolderAdapter;
 import pucminas.com.br.luz_agua.data.HolderData;
+import pucminas.com.br.luz_agua.models.Company;
 import pucminas.com.br.luz_agua.models.Holder;
 import pucminas.com.br.luz_agua.models.Individual;
 
@@ -120,10 +121,10 @@ public class HolderFragment extends Fragment {
                 Log.d("teste", "cheguei aqui" );
                 for(DataSnapshot holder : dataSnapshot.getChildren())  {
                     //Holder h = new IndividualFactory().createHolder();
-                    Holder h = holder.getValue(Individual.class);
+                    Holder h = holder.getValue(Company.class);
                     assert h != null;
 
-                    dataListJuridica.add(new HolderData(((Individual) h).fullName(), ((Individual) h).getCPF()));
+                    dataListJuridica.add(new HolderData(((Company) h).getCompanyName(), ((Company) h).getCNPJ()));
                 }
                 RecyclerView recyclerView = mView.findViewById(R.id.recicler_holder);
                 recyclerView.setHasFixedSize(true);
