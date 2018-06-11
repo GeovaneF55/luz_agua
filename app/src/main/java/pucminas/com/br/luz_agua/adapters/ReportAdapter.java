@@ -1,56 +1,68 @@
 package pucminas.com.br.luz_agua.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import pucminas.com.br.luz_agua.R;
+import pucminas.com.br.luz_agua.data.ReportData;
 
-public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder> {
+public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView> {
 
-    private String[] mDataset;
+    private Context mCtx;
+    private List<ReportData> dataList;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        TextView mTextView;
-        ViewHolder(TextView v) {
-            super(v);
-            mTextView = v;
-        }
+    public ReportAdapter(Context mCtx, List<ReportData> dataList) {
+        this.mCtx = mCtx;
+        this.dataList = dataList;
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public ReportAdapter(String[] myDataset) {
-        mDataset = myDataset;
-    }
-
-    // Create new views (invoked by the layout manager)
     @NonNull
     @Override
-    public ReportAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                                                        int viewType) {
-        // create a new view
-        TextView v = (TextView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_main, parent, false);
-        return new ViewHolder(v);
+    public ReportAdapter.ReportView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(mCtx);
+        View view = inflater.inflate(R.layout.report_item, null );
+        return new ReportAdapter.ReportView(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        holder.mTextView.setText(mDataset[position]);
+    public void onBindViewHolder(@NonNull ReportAdapter.ReportView report, int position) {
+        ReportData data = dataList.get(position);
+        report.contaTextView.setText(data.getConta());
+        report.dataTextView.setText(data.getData());
+        report.consumoTextView.setText(data.getConsumo());
+        report.valorTextView.setText(data.getValor());
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return dataList.size();
     }
 
+    class ReportView extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private TextView contaTextView;
+        private TextView dataTextView;
+        private TextView consumoTextView;
+        private TextView valorTextView;
+
+        ReportView(View itemView) {
+            super(itemView);
+            contaTextView   = (TextView) itemView.findViewById(R.id.conta_report_EditText);
+            dataTextView    = (TextView) itemView.findViewById(R.id.data_report_EditText);
+            consumoTextView = (TextView) itemView.findViewById(R.id.consumo_total_EditText);
+            valorTextView = (TextView) itemView.findViewById(R.id.valor_total_EditText);
+            itemView.setOnClickListener(this);
+        }
+
+        public void onClick(View view){
+        }
+
+    }
 }
