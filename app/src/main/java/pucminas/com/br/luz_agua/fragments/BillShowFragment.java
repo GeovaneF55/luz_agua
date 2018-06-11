@@ -14,6 +14,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,9 +28,13 @@ import pucminas.com.br.luz_agua.data.BillData;
 
 public class BillShowFragment extends Fragment {
 
+    // RecyclerView
     BillAdapter bill_adapter;
     List<BillData> dataList;
     Context mContext;
+
+    //Instance Firebase
+    private DatabaseReference mDatabase;
 
     public BillShowFragment() {
         // Required empty public constructor
@@ -42,6 +49,7 @@ public class BillShowFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mContext = this.getActivity();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("contas");
     }
 
     @Override
@@ -59,9 +67,9 @@ public class BillShowFragment extends Fragment {
      */
     private void addData() {
 
-        dataList.add(new BillData("Água","22/06/2018", "6,880 m3"));
-        dataList.add(new BillData("Luz", "11/07/2018", "7,083 kW/h"));
-        dataList.add(new BillData("Água", "06/08/2018", "6,865 m3"));
+        dataList.add(new BillData( "Água","22/06/2018", "6,880 m3"));
+        dataList.add(new BillData( "Luz","22/06/2018", "6,880 m3"));
+        dataList.add(new BillData( "Luz","22/06/2018", "6,880 m3"));
     }
 
     @Override
