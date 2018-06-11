@@ -34,11 +34,14 @@ import pucminas.com.br.luz_agua.models.Individual;
 public class HolderFragment extends Fragment {
 
     HolderAdapter adapter;
-    List<HolderData> dataList;
+    List<HolderData> dataListFisica;
+    List<HolderData> dataListJuridica;
+    List<HolderData> dataListFinal;
 
     // Retrieve data from Firebase
 
     DatabaseReference databaseReference, databaseReferenceJuridica;
+    private View mView;
 
     public HolderFragment() {
         // Required empty public constructor
@@ -57,7 +60,7 @@ public class HolderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        databaseReference = FirebaseDatabase.getInstance().getReference("pessoa_fisica");
+        databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
 
@@ -65,10 +68,12 @@ public class HolderFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_holder, container, false);
-        dataList = new ArrayList<>();
+        mView = inflater.inflate(R.layout.fragment_holder, container, false);
+        dataListFisica   = new ArrayList<>();
+        dataListJuridica = new ArrayList<>();
+        dataListFinal    = new ArrayList<>();
         addData();
-        return view;
+        return mView;
     }
 
 
@@ -76,24 +81,59 @@ public class HolderFragment extends Fragment {
 //     * Aqui será feito a inserção dos dados buscados do Firebase
 //     */
     private void addData() {
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.child("pessoa_fisica").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dataList.clear();
+                dataListFisica.clear();
+                dataListFinal.clear();
                 Log.d("teste", "cheguei aqui" );
                 for(DataSnapshot holder : dataSnapshot.getChildren())  {
                     //Holder h = new IndividualFactory().createHolder();
                     Holder h = holder.getValue(Individual.class);
                     assert h != null;
 
-                    dataList.add(new HolderData(((Individual) h).fullName(), ((Individual) h).getCPF()));
+                    dataListFisica.add(new HolderData(((Individual) h).fullName(), ((Individual) h).getCPF()));
                 }
-                RecyclerView recyclerView = getActivity().findViewById(R.id.recicler_holder);
+                RecyclerView recyclerView = mView.findViewById(R.id.recicler_holder);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-                adapter = new HolderAdapter(getContext(), dataList);
+                dataListFinal.addAll(dataListFisica);
+                dataListFinal.addAll(dataListJuridica);
+                adapter = new HolderAdapter(getContext(), dataListFinal);
+                recyclerView.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        databaseReference.child("pessoa_juridica").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataListJuridica.clear();
+                dataListFinal.clear();
+                Log.d("teste", "cheguei aqui" );
+                for(DataSnapshot holder : dataSnapshot.getChildren())  {
+                    //Holder h = new IndividualFactory().createHolder();
+                    Holder h = holder.getValue(Individual.class);
+                    assert h != null;
+
+                    dataListJuridica.add(new HolderData(((Individual) h).fullName(), ((Individual) h).getCPF()));
+                }
+                RecyclerView recyclerView = mView.findViewById(R.id.recicler_holder);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                dataListFinal.addAll(dataListFisica);
+                dataListFinal.addAll(dataListJuridica);
+
+                adapter = new HolderAdapter(getContext(), dataListFinal);
                 recyclerView.setAdapter(adapter);
 
             }
