@@ -35,7 +35,7 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ListViewHo
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         HolderData data = dataList.get(position);
         holder.titularTextView.setText(data.getNome());
-        holder.cpfTextView.setText(data.getCpf());
+        holder.cpfTextView.setText(data.getDoc());
 
     }
 

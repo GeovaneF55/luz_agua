@@ -5,11 +5,19 @@ public class Individual extends Holder {
     private String firstName;
     private String lastName;
 
-    public String getFullName() {
+    public String fullName() {
         return firstName + " " + lastName;
     }
 
-    public String getFirstName(String firstName) {
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
+
+    public String getFirstName() {
         return firstName;
     }
 
@@ -23,13 +31,5 @@ public class Individual extends Holder {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getCPF() {
-        return CPF;
-    }
-
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
     }
 }
