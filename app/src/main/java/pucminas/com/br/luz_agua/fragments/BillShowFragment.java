@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +14,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import pucminas.com.br.luz_agua.MyEditTextDatePicker;
 import pucminas.com.br.luz_agua.R;
+import pucminas.com.br.luz_agua.adapters.BillAdapter;
+import pucminas.com.br.luz_agua.model.BillData;
 
 public class BillShowFragment extends Fragment {
 
+    BillAdapter bill_adapter;
+    List<BillData> dataList;
     Context mContext;
 
     public BillShowFragment() {
@@ -44,6 +52,16 @@ public class BillShowFragment extends Fragment {
         createComponents(view);
 
         return view;
+    }
+
+    /**
+     * Aqui será feito a inserção dos dados buscados do Firebase
+     */
+    private void addData() {
+
+        dataList.add(new BillData("Água","22/06/2018", "6,880 m3"));
+        dataList.add(new BillData("Luz", "11/07/2018", "7,083 kW/h"));
+        dataList.add(new BillData("Água", "06/08/2018", "6,865 m3"));
     }
 
     @Override
@@ -99,5 +117,15 @@ public class BillShowFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {  }
         });
+
+        // RecyclerView
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recicler_contas);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        dataList = new ArrayList<>();
+        addData();
+
+        bill_adapter = new BillAdapter(mContext ,dataList);
+        recyclerView.setAdapter(bill_adapter);
     }
 }

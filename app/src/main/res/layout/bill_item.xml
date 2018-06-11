@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="6dp">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="4dp"
+                android:id="@+id/imageViewBill"
+                android:src="@drawable/ic_menu_contas"
+                android:contentDescription="@string/conta" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/conta_EditText"
+                android:text="@string/tipo_conta"
+                android:layout_marginStart="5dp"
+                android:textSize="22sp"
+                android:layout_toEndOf="@id/imageViewBill"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/data_EditText"
+                android:layout_below="@id/conta_EditText"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@id/imageViewBill"
+                android:text="@string/data"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/consumo_EditText"
+                android:layout_below="@id/data_EditText"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@id/imageViewBill"
+                android:text="@string/consumo"
+                android:textSize="14sp"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
