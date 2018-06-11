@@ -277,10 +277,17 @@ public class BillRegisterFragment extends Fragment{
 
                 String date = mEditDate.getText().toString();
                 char decimalSeparator = DecimalFormatSymbols.getInstance(Locale.getDefault()).getDecimalSeparator();
-                double lastConsumpt = Double.parseDouble(mEditLastConsumpt.getText()
-                        .toString().replaceAll("[^0-9" + decimalSeparator + "]", ""));
-                double consumpt = Double.parseDouble(mEditConsumpt.getText()
-                        .toString().replaceAll("[^0-9" + decimalSeparator + "]", ""));
+                String aux = mEditLastConsumpt.getText().toString()
+                        .replaceAll("[^0-9" + decimalSeparator + "]", "");
+                aux = aux.replace(decimalSeparator, '.');
+
+                double lastConsumpt = Double.parseDouble(aux);
+
+                aux = mEditConsumpt.getText().toString()
+                        .replaceAll("[^0-9" + decimalSeparator + "]", "");
+                aux = aux.replace(decimalSeparator, '.');
+
+                double consumpt = Double.parseDouble(aux);
 
                 writeBill(child, doc, date, lastConsumpt, consumpt);
             }
