@@ -15,13 +15,13 @@ import java.util.List;
 
 import pucminas.com.br.luz_agua.R;
 import pucminas.com.br.luz_agua.adapters.HolderAdapter;
-import pucminas.com.br.luz_agua.model.OurData;
+import pucminas.com.br.luz_agua.model.HolderData;
 
 
 public class HolderFragment extends Fragment {
 
     HolderAdapter adapter;
-    List<OurData> dataList;
+    List<HolderData> dataList;
 
 
     public HolderFragment() {
@@ -67,9 +67,9 @@ public class HolderFragment extends Fragment {
      */
     private void addData() {
 
-        dataList.add(new OurData("Liu Yang","999.999.999-99"));
-        dataList.add(new OurData("SCC Corpo", "80.699.229/0001-04"));
-        dataList.add(new OurData("Zézin", "555.555.555-55"));
+        dataList.add(new HolderData("Liu Yang","999.999.999-99"));
+        dataList.add(new HolderData("SCC Corpo", "80.699.229/0001-04"));
+        dataList.add(new HolderData("Zézin", "555.555.555-55"));
     }
 
     @Override

@@ -11,14 +11,14 @@ import android.widget.TextView;
 import java.util.List;
 
 import pucminas.com.br.luz_agua.R;
-import pucminas.com.br.luz_agua.model.OurData;
+import pucminas.com.br.luz_agua.model.HolderData;
 
 public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ListViewHolder> {
 
     private Context mCtx;
-    private List<OurData> dataList;
+    private List<HolderData> dataList;
 
-    public HolderAdapter(Context mCtx, List<OurData> dataList) {
+    public HolderAdapter(Context mCtx, List<HolderData> dataList) {
         this.mCtx = mCtx;
         this.dataList = dataList;
     }
@@ -33,7 +33,7 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ListViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
-        OurData data = dataList.get(position);
+        HolderData data = dataList.get(position);
         holder.titularTextView.setText(data.getNome());
         holder.cpfTextView.setText(data.getCpf());
 
