@@ -18,7 +18,7 @@ public class Individual extends Holder {
     }
 
     public String getLastName() {
-        return firstName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {

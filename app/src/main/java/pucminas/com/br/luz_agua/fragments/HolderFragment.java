@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pucminas.com.br.luz_agua.R;
-import pucminas.com.br.luz_agua.adapters.ListAdapter;
+import pucminas.com.br.luz_agua.adapters.HolderAdapter;
 import pucminas.com.br.luz_agua.model.OurData;
 
 
 public class HolderFragment extends Fragment {
 
-    ListAdapter adapter;
+    HolderAdapter adapter;
     List<OurData> dataList;
 
 
@@ -49,13 +49,13 @@ public class HolderFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_holder, container, false);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recicler_holder);
+        RecyclerView recyclerView = view.findViewById(R.id.recicler_holder);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         dataList = new ArrayList<>();
         addData();
 
-        adapter = new ListAdapter(getContext(),dataList);
+        adapter = new HolderAdapter(getContext(),dataList);
         recyclerView.setAdapter(adapter);
 
         return view;

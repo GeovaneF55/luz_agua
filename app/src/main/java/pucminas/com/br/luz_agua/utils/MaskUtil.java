@@ -1,11 +1,9 @@
 package pucminas.com.br.luz_agua.utils;
 
-import android.annotation.SuppressLint;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Locale;
 
