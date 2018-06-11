@@ -22,7 +22,7 @@
                 android:layout_height="50dp"
                 android:padding="4dp"
                 android:id="@+id/imageViewReport"
-                android:src="@drawable/ic_menu_relatorio"
+                android:src="@drawable/ic_menu_contas"
                 android:contentDescription="@string/relatorio" />
 
             <TextView
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id = "@+id/data_report_EditText"
-                android:layout_below="@id/conta_EditText"
+                android:layout_below="@id/conta_report_EditText"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@id/imageViewReport"
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id = "@+id/consumo_total_EditText"
-                android:layout_below="@id/data_EditText"
+                android:layout_below="@id/data_report_EditText"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@id/imageViewReport"
