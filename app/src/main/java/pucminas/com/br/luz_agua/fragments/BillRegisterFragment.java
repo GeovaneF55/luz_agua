@@ -20,7 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 import pucminas.com.br.luz_agua.CompanyFactory;
@@ -29,6 +31,7 @@ import pucminas.com.br.luz_agua.IndividualFactory;
 import pucminas.com.br.luz_agua.R;
 import pucminas.com.br.luz_agua.MyEditTextDatePicker;
 import pucminas.com.br.luz_agua.WaterBillFactory;
+import pucminas.com.br.luz_agua.data.HolderData;
 import pucminas.com.br.luz_agua.models.Bill;
 import pucminas.com.br.luz_agua.models.Company;
 import pucminas.com.br.luz_agua.models.Holder;

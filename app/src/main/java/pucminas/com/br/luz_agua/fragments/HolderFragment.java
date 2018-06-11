@@ -10,8 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import pucminas.com.br.luz_agua.R;
 import pucminas.com.br.luz_agua.adapters.HolderAdapter;
@@ -54,7 +60,6 @@ public class HolderFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         dataList = new ArrayList<>();
         addData();
-
         adapter = new HolderAdapter(getContext(),dataList);
         recyclerView.setAdapter(adapter);
 
