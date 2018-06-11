@@ -35,6 +35,7 @@
     <string name="nome_titular">Nome</string>
     <string name="razao_social">Razão Social</string>
     <string name="consumo_anterior">Consumo Anterior</string>
+    <string name="conta">Conta</string>
 
     <!-- Spinners -->
     <string-array name="spinner_tipo_conta">
