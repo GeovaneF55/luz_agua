@@ -87,7 +87,6 @@ public class HolderFragment extends Fragment {
                 dataListFisica.clear();
                 dataListFinal.clear();
                 for(DataSnapshot holder : dataSnapshot.getChildren())  {
-                    //Holder h = new IndividualFactory().createHolder();
                     Holder h = holder.getValue(Individual.class);
                     assert h != null;
 
