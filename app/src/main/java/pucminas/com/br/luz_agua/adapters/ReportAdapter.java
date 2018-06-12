@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
@@ -46,7 +47,8 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
                 : "kW/h";
         report.consumoAnteriorTextView.setText(Double.toString(data.getConsumo_anterior()) + " " + medidaConsumo);
         report.consumoTextView.setText(Double.toString(data.getConsumo()) + " " + medidaConsumo);
-        report.valorTextView.setText(moeda + " " + Double.toString(data.getValor()));
+        report.valorTextView.setText(moeda + " " +
+                String.format(Locale.getDefault(),  "%.2f", data.getValor()));
     }
 
     @Override
