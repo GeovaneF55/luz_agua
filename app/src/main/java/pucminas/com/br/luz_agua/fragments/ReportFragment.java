@@ -41,7 +41,6 @@ public class ReportFragment extends Fragment {
     // Instance Firebase
     private DatabaseReference mDatabase;
     private FirebaseDatabase mFirebaseDatabase;
-    private ChildEventListener mChildEventListener;
 
     private Switch mSwitchData;
     private EditText mEditDate;

@@ -7,7 +7,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +27,11 @@ import java.util.Objects;
 import pucminas.com.br.luz_agua.MyEditTextDatePicker;
 import pucminas.com.br.luz_agua.R;
 import pucminas.com.br.luz_agua.adapters.BillAdapter;
+import pucminas.com.br.luz_agua.adapters.ReportAdapter;
 import pucminas.com.br.luz_agua.data.BillData;
-import pucminas.com.br.luz_agua.models.Holder;
-import pucminas.com.br.luz_agua.models.Individual;
+import pucminas.com.br.luz_agua.data.ReportData;
+import pucminas.com.br.luz_agua.models.Bill;
+import pucminas.com.br.luz_agua.models.WaterBill;
 
 public class BillShowFragment extends Fragment {
 
@@ -38,9 +39,13 @@ public class BillShowFragment extends Fragment {
 
     // RecyclerView
     BillAdapter bill_adapter;
-    List<BillData> dataListAgua;
-    List<BillData> dataListLuz;
-    List<BillData> dataListFinal;
+    List<BillData> dataList;
+    ReportAdapter adapter;
+    List<ReportData> dataListFinal;
+    List<ReportData> dataListAgua;
+    List<ReportData> dataListLuz;
+
+    private View mView;
 
     //Instance Firebase
     private DatabaseReference mDatabase;
@@ -64,77 +69,98 @@ public class BillShowFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_bill_show, container, false);
+        mView = inflater.inflate(R.layout.fragment_bill_show, container, false);
+        dataListLuz = new ArrayList<>();
+        dataListAgua = new ArrayList<>();
+        dataListFinal = new ArrayList<>();
+        addData();
 
-        createComponents(view);
+        createComponents(mView);
 
-        return view;
+        return mView;
     }
 
-    private void addData(final View view) {
-
-        mDatabase.child("contas").child("agua").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dataListAgua.clear();
-                dataListFinal.clear();
-
-                for(DataSnapshot holder : dataSnapshot.getChildren())  {
-                    Holder h = holder.getValue(Individual.class);
-                    assert h != null;
-
-                    //dataListAgua.add(new BillData(((Individual) h).fullName(), ((Individual) h).getCPF()));
-                }
-
-                // RecyclerView
-                RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recicler_contas);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-
-                dataListFinal.addAll(dataListAgua);
-                dataListFinal.addAll(dataListLuz);
-
-                bill_adapter = new BillAdapter(mContext, dataListFinal);
-                recyclerView.setAdapter(bill_adapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        mDatabase.child("contas").child("luz").addValueEventListener(new ValueEventListener() {
+    /**
+     * Aqui será feito a inserção dos dados buscados do Firebase
+     */
+    private void addData() {
+        mDatabase.child("luz").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dataListLuz.clear();
                 dataListFinal.clear();
 
-                for(DataSnapshot holder : dataSnapshot.getChildren())  {
-                    Holder h = holder.getValue(Individual.class);
-                    assert h != null;
+                for (DataSnapshot holder : dataSnapshot.getChildren()) {
+                    for (DataSnapshot bill : holder.getChildren()) {
+                        Bill b = bill.getValue(WaterBill.class);
+                        assert b != null;
 
-                    //dataListLuz.add(new BillData(((Individual) h).fullName(), ((Individual) h).getCPF()));
+                        String conta = "Luz";
+                        String data = b.date();
+                        double consumo = b.getLeituraAtual();
+                        double consumo_anterior = b.getLeituraAnterior();
+                        double valor = b.calcularValor();
+
+                        dataListLuz.add(new ReportData(conta, data, consumo, consumo_anterior, valor));
+                    }
                 }
 
-                // RecyclerView
-                RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recicler_contas);
+                RecyclerView recyclerView = mView.findViewById(R.id.robson);
                 recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
                 dataListFinal.addAll(dataListAgua);
                 dataListFinal.addAll(dataListLuz);
-
-                bill_adapter = new BillAdapter(mContext, dataListFinal);
-                recyclerView.setAdapter(bill_adapter);
+                adapter = new ReportAdapter(getContext(), dataListFinal);
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
+        });
+
+        mDatabase.child("agua").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataListAgua.clear();
+                dataListFinal.clear();
+
+                for (DataSnapshot holder : dataSnapshot.getChildren()) {
+                    for (DataSnapshot bill : holder.getChildren()) {
+                        Bill b = bill.getValue(WaterBill.class);
+                        assert b != null;
+
+                        String conta = "Água";
+                        String data = b.date();
+                        double consumo = b.getLeituraAtual();
+                        double consumo_anterior = b.getLeituraAnterior();
+                        double valor = b.calcularValor();
+
+                        dataListAgua.add(new ReportData(conta, data, consumo, consumo_anterior, valor));
+                    }
+                }
+
+                RecyclerView recyclerView = mView.findViewById(R.id.robson);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                dataListFinal.addAll(dataListAgua);
+                dataListFinal.addAll(dataListLuz);
+                adapter = new ReportAdapter(getContext(), dataListFinal);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
         });
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -191,9 +217,13 @@ public class BillShowFragment extends Fragment {
         });
 
         // RecyclerView
-        dataListAgua   = new ArrayList<>();
-        dataListLuz    = new ArrayList<>();
-        dataListFinal  = new ArrayList<>();
-        addData(view);
+        RecyclerView recyclerView = view.findViewById(R.id.robson);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        dataList = new ArrayList<>();
+        addData();
+
+        bill_adapter = new BillAdapter(mContext ,dataList);
+        recyclerView.setAdapter(bill_adapter);
     }
 }
