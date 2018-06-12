@@ -5,12 +5,14 @@ public class ReportData {
     private String conta;
     private String data;
     private String consumo;
+    private String consumo_anterior;
     private String valor;
 
-    public ReportData(String conta, String data, String consumo, String valor) {
+    public ReportData(String conta, String data, String consumo, String consumo_anterior,String valor) {
         this.conta = conta;
         this.data = data;
         this.consumo = consumo;
+        this.consumo_anterior = consumo_anterior;
         this.valor = valor;
     }
 

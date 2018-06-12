@@ -7,13 +7,16 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +24,11 @@ import java.util.List;
 import pucminas.com.br.luz_agua.MyEditTextDatePicker;
 import pucminas.com.br.luz_agua.R;
 import pucminas.com.br.luz_agua.adapters.ReportAdapter;
+import pucminas.com.br.luz_agua.data.HolderData;
 import pucminas.com.br.luz_agua.data.ReportData;
+import pucminas.com.br.luz_agua.models.Holder;
+import pucminas.com.br.luz_agua.models.Individual;
+import pucminas.com.br.luz_agua.models.Report;
 
 public class ReportFragment extends Fragment {
 
@@ -31,7 +38,8 @@ public class ReportFragment extends Fragment {
     private ChildEventListener mChildEventListener;
 
     ReportAdapter report_adapter;
-    List<ReportData> dataList;
+    List<HolderData> dataListAgua;
+    List<HolderData> dataListLuz;
     Context mContext;
 
     public ReportFragment() {
@@ -54,7 +62,7 @@ public class ReportFragment extends Fragment {
 
         mContext = this.getActivity();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabase = mFirebaseDatabase.getReference().child("messages");
+            mDatabase = mFirebaseDatabase.getReference().child("contas");
     }
 
     @Override
@@ -79,10 +87,21 @@ public class ReportFragment extends Fragment {
      * Aqui será feito a inserção dos dados buscados do Firebase
      */
     private void addData() {
+        mDatabase.child("pessoa_fisica").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataListAgua.clear();
+                dataListLuz.clear();
 
-        dataList.add(new ReportData("Água","22/06/2018", "6,880 m3", "R$60,00"));
-        dataList.add(new ReportData("Luz", "11/07/2018", "7,083 kW/h", "R$140,00"));
-        dataList.add(new ReportData("Água", "06/08/2018", "6,865 m3", "R$30,00"));
+                for(DataSnapshot holder : dataSnapshot.getChildren())  {
+                    //Holder h = new IndividualFactory().createHolder();
+                    Holder h = holder.getValue(Report.class);
+                    assert h != null;
+
+                    dataListAgua.add(new HolderData(((Individual) h).fullName(), ((Individual) h).getCPF()));
+            }
+        }
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
