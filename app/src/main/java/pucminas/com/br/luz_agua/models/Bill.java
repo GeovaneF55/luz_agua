@@ -17,13 +17,39 @@ public abstract class Bill {
 
     public abstract double calcularValor();
 
-    public String getDate() {
+    public String date() {
         return mes + "/" + ano;
     }
+
+    public String getMes() {
+        return mes;
+    }
+
+    public void setMes(String mes) {
+        this.mes = mes;
+    }
+
+    public String getAno() {
+        return ano;
+    }
+
+    public void setAno(String ano) {
+        this.ano = ano;
+    }
+
     public double getLeituraAnterior() {
         return leituraAnterior;
     }
+
+    public void setLeituraAnterior(double leituraAnterior) {
+        this.leituraAnterior = leituraAnterior;
+    }
+
     public double getLeituraAtual() {
         return leituraAtual;
+    }
+
+    public void setLeituraAtual(double leituraAtual) {
+        this.leituraAtual = leituraAtual;
     }
 }

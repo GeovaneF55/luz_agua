@@ -21,15 +21,15 @@ public class Report {
     }
 
     public double calcVariacaoAbsoluta() {
-
+        return 0;
     }
     public  double calcPercentual() {
-
+        return 0;
     }
     public double gerarRelatorio() {
-
+        return 0;
     }
     public double emitirRelatorio() {
-
+        return 0;
     }
 }

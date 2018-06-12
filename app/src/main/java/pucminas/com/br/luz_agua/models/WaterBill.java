@@ -5,9 +5,10 @@ public class WaterBill extends Bill {
         super(mes, ano, leituraAnterior, leituraAtual);
     }
 
+    public WaterBill() { }
+
     @Override
     public double calcularValor() {
-        // TODO: Metodo de calcular valor
-        return leituraAtual;
+        return 5.88 * leituraAtual;
     }
 }

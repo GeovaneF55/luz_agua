@@ -4,11 +4,11 @@ public class ReportData {
 
     private String conta;
     private String data;
-    private String consumo;
-    private String consumo_anterior;
-    private String valor;
+    private double consumo;
+    private double consumo_anterior;
+    private double valor;
 
-    public ReportData(String conta, String data, String consumo, String consumo_anterior,String valor) {
+    public ReportData(String conta, String data, double consumo, double consumo_anterior, double valor) {
         this.conta = conta;
         this.data = data;
         this.consumo = consumo;
@@ -32,19 +32,27 @@ public class ReportData {
         this.data = data;
     }
 
-    public String getConsumo() {
+    public double getConsumo() {
         return consumo;
     }
 
-    public void setConsumo(String consumo) {
+    public void setConsumo(double consumo) {
         this.consumo = consumo;
     }
 
-    public String getValor() {
+    public double getConsumo_anterior() {
+        return consumo_anterior;
+    }
+
+    public void setConsumo_anterior(double consumo_anterior) {
+        this.consumo_anterior = consumo_anterior;
+    }
+
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 }
