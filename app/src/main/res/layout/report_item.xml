@@ -45,11 +45,23 @@
                 android:text="@string/data"
                 android:textSize="14sp"/>
 
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/consumo_anterior_EditText"
+                android:layout_below="@id/data_report_EditText"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@id/imageViewReport"
+                android:text="@string/consumo_anterior"
+                android:textSize="14sp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id = "@+id/consumo_total_EditText"
-                android:layout_below="@id/data_report_EditText"
+                android:layout_below="@id/consumo_anterior_EditText"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@id/imageViewReport"

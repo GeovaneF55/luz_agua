@@ -77,9 +77,9 @@ public class HolderFragment extends Fragment {
     }
 
 
-//    /**
-//     * Aqui será feito a inserção dos dados buscados do Firebase
-//     */
+   /**
+    * Aqui será feito a inserção dos dados buscados do Firebase
+    */
     private void addData() {
         databaseReference.child("pessoa_fisica").addValueEventListener(new ValueEventListener() {
             @Override
