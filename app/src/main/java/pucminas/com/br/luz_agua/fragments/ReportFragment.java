@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.Switch;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +42,9 @@ public class ReportFragment extends Fragment {
     private DatabaseReference mDatabase;
     private FirebaseDatabase mFirebaseDatabase;
     private ChildEventListener mChildEventListener;
+
+    private Switch mSwitchData;
+    private EditText mEditDate;
 
     ReportAdapter adapter;
     List<ReportData> dataListFinal;
@@ -84,6 +90,9 @@ public class ReportFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_report, container, false);
+
+        mEditDate = (EditText) mView.findViewById(R.id.input_relatorio);
+
         dataListLuz = new ArrayList<>();
         dataListAgua = new ArrayList<>();
         dataListFinal = new ArrayList<>();
@@ -98,6 +107,21 @@ public class ReportFragment extends Fragment {
      * Aqui será feito a inserção dos dados buscados do Firebase
      */
     private void addData() {
+
+        // Switch
+        Switch mSwitchData = (Switch) mView.findViewById(R.id.switch_data_relatorio);
+
+        mSwitchData.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    mEditDate.setText("");
+                    mEditDate.setEnabled(false);
+                } else {
+                    mEditDate.setEnabled(true);
+                }
+            }
+        });
+
         mDatabase.child("agua").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
