@@ -7,13 +7,17 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +25,13 @@ import java.util.List;
 import pucminas.com.br.luz_agua.MyEditTextDatePicker;
 import pucminas.com.br.luz_agua.R;
 import pucminas.com.br.luz_agua.adapters.ReportAdapter;
+import pucminas.com.br.luz_agua.data.HolderData;
 import pucminas.com.br.luz_agua.data.ReportData;
+import pucminas.com.br.luz_agua.models.Bill;
+import pucminas.com.br.luz_agua.models.Holder;
+import pucminas.com.br.luz_agua.models.Individual;
+import pucminas.com.br.luz_agua.models.Report;
+import pucminas.com.br.luz_agua.models.WaterBill;
 
 public class ReportFragment extends Fragment {
 
@@ -30,9 +40,13 @@ public class ReportFragment extends Fragment {
     private FirebaseDatabase mFirebaseDatabase;
     private ChildEventListener mChildEventListener;
 
-    ReportAdapter report_adapter;
-    List<ReportData> dataList;
+    ReportAdapter adapter;
+    List<ReportData> dataListFinal;
+    List<ReportData> dataListAgua;
+    List<ReportData> dataListLuz;
     Context mContext;
+
+    private View mView;
 
     public ReportFragment() {
         // Required empty public constructor
@@ -54,7 +68,7 @@ public class ReportFragment extends Fragment {
 
         mContext = this.getActivity();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabase = mFirebaseDatabase.getReference().child("messages");
+            mDatabase = mFirebaseDatabase.getReference().child("contas");
     }
 
     @Override
@@ -69,20 +83,96 @@ public class ReportFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_report, container, false);
-        createComponents(view);
+        mView = inflater.inflate(R.layout.fragment_report, container, false);
+        dataListLuz = new ArrayList<>();
+        dataListAgua = new ArrayList<>();
+        dataListFinal = new ArrayList<>();
+        addData();
 
-        return view;
+        //createComponents(view);
+
+        return mView;
     }
 
     /**
      * Aqui será feito a inserção dos dados buscados do Firebase
      */
     private void addData() {
+        mDatabase.child("agua").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataListAgua.clear();
+                dataListFinal.clear();
 
-        dataList.add(new ReportData("Água","22/06/2018", "6,880 m3", "R$60,00"));
-        dataList.add(new ReportData("Luz", "11/07/2018", "7,083 kW/h", "R$140,00"));
-        dataList.add(new ReportData("Água", "06/08/2018", "6,865 m3", "R$30,00"));
+                for (DataSnapshot holder : dataSnapshot.getChildren()) {
+                    for (DataSnapshot bill : holder.getChildren()) {
+                        Bill b = bill.getValue(WaterBill.class);
+                        assert b != null;
+
+                        String conta = "Água";
+                        String data = b.date();
+                        double consumo = b.getLeituraAtual();
+                        double consumo_anterior = b.getLeituraAnterior();
+                        double valor = b.calcularValor();
+
+                        dataListAgua.add(new ReportData(conta, data, consumo, consumo_anterior, valor));
+                    }
+                }
+
+                RecyclerView recyclerView = mView.findViewById(R.id.recicler_report);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                dataListFinal.addAll(dataListAgua);
+                dataListFinal.addAll(dataListLuz);
+                adapter = new ReportAdapter(getContext(), dataListFinal);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+        mDatabase.child("luz").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataListLuz.clear();
+                dataListFinal.clear();
+
+                for (DataSnapshot holder : dataSnapshot.getChildren()) {
+                    for (DataSnapshot bill : holder.getChildren()) {
+                        Bill b = bill.getValue(WaterBill.class);
+                        assert b != null;
+
+                        String conta = "Luz";
+                        String data = b.date();
+                        double consumo = b.getLeituraAtual();
+                        double consumo_anterior = b.getLeituraAnterior();
+                        double valor = b.calcularValor();
+
+                        dataListLuz.add(new ReportData(conta, data, consumo, consumo_anterior, valor));
+                    }
+                }
+
+                RecyclerView recyclerView = mView.findViewById(R.id.recicler_report);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                dataListFinal.addAll(dataListAgua);
+                dataListFinal.addAll(dataListLuz);
+                adapter = new ReportAdapter(getContext(), dataListFinal);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -98,17 +188,5 @@ public class ReportFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-    }
-
-    public void createComponents(View view) {
-        // RecyclerView
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recicler_report);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        dataList = new ArrayList<>();
-        addData();
-
-        report_adapter = new ReportAdapter(mContext ,dataList);
-        recyclerView.setAdapter(report_adapter);
     }
 }

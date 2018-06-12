@@ -77,16 +77,15 @@ public class HolderFragment extends Fragment {
     }
 
 
-//    /**
-//     * Aqui será feito a inserção dos dados buscados do Firebase
-//     */
+   /**
+    * Aqui será feito a inserção dos dados buscados do Firebase
+    */
     private void addData() {
         databaseReference.child("pessoa_fisica").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dataListFisica.clear();
                 dataListFinal.clear();
-                Log.d("teste", "cheguei aqui" );
                 for(DataSnapshot holder : dataSnapshot.getChildren())  {
                     //Holder h = new IndividualFactory().createHolder();
                     Holder h = holder.getValue(Individual.class);
@@ -116,7 +115,6 @@ public class HolderFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dataListJuridica.clear();
                 dataListFinal.clear();
-                Log.d("teste", "cheguei aqui" );
                 for(DataSnapshot holder : dataSnapshot.getChildren())  {
                     Holder h = holder.getValue(Company.class);
                     assert h != null;

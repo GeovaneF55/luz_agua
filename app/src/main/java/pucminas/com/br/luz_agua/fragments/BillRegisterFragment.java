@@ -167,6 +167,7 @@ public class BillRegisterFragment extends Fragment{
                 }
 
                 mEditConsumpt.setText(mEditConsumpt.getText());
+                mEditLastConsumpt.setText(mEditLastConsumpt.getText());
             }
 
             @Override

@@ -7,7 +7,6 @@ public class ElectricityBill extends Bill {
 
     @Override
     public double calcularValor() {
-        // TODO: Metodo de calcular valor
-        return this.leituraAtual;
+        return 7.57 * leituraAtual;
     }
 }

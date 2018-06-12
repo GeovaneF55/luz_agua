@@ -7,6 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -33,10 +37,54 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ListViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
-        HolderData data = dataList.get(position);
+        final HolderData data = dataList.get(position);
         holder.titularTextView.setText(data.getNome());
         holder.cpfTextView.setText(data.getDoc());
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(),"", Toast.LENGTH_LONG).show();
+            }
+        });
+        holder.itemView.setOnLongClickListener( new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View v) {
+                removeItem(data);
+                Toast.makeText(v.getContext(), "Titular Removido Com  Sucesso!", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+    }
+
+    private void removeItem(HolderData data) {
+        int position = dataList.indexOf(data);
+        dataList.remove(data);
+        notifyItemRemoved(position);
+        DatabaseReference databaseReference;
+        if(data.getDoc().length() == 11 ) {
+            String individual = "pessoa_fisica_" + data.getDoc();
+            databaseReference = FirebaseDatabase.getInstance().getReference("pessoa_fisica").child(data.getDoc());
+            databaseReference.removeValue();
+            databaseReference = FirebaseDatabase.getInstance().getReference("contas").child("agua")
+                    .child(individual);
+            databaseReference.removeValue();
+            databaseReference = FirebaseDatabase.getInstance().getReference("contas").child("luz")
+                    .child(individual);
+            databaseReference.removeValue();
+
+        } else {
+            String company = "pessoa_juridica_" + data.getDoc();
+            databaseReference = FirebaseDatabase.getInstance().getReference("pessoa_juridica").child(data.getDoc());
+            databaseReference.removeValue();
+            databaseReference = FirebaseDatabase.getInstance().getReference("contas").child("agua")
+                    .child(company);
+            databaseReference.removeValue();
+            databaseReference = FirebaseDatabase.getInstance().getReference("contas").child("luz")
+                    .child(company);
+            databaseReference.removeValue();
+        }
     }
 
     @Override
@@ -44,7 +92,7 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ListViewHo
         return dataList.size();
     }
 
-    class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ListViewHolder extends RecyclerView.ViewHolder {
 
         private TextView titularTextView;
         private TextView cpfTextView;
@@ -53,12 +101,6 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ListViewHo
             super(itemView);
             titularTextView = (TextView) itemView.findViewById(R.id.nome_titular_EditText);
             cpfTextView     = (TextView) itemView.findViewById(R.id.cpf_titular_EditText);
-            itemView.setOnClickListener(this);
         }
-
-        public void onClick(View view){
-
-        }
-
     }
 }
